@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="TaskFlow Pro is a responsive Kanban board to plan, track, and complete tasks." />
+  <title>TaskFlow Pro — Smart Kanban Board</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+<div class="app">
+  <header class="topbar">
+    <div class="brand"><div class="logo">✓</div><div>TaskFlow <span>Pro</span></div></div>
+    <div class="top-actions"><button class="icon-btn" id="themeBtn" aria-label="Toggle theme" title="Toggle dark/light mode">☾</button><button class="primary-btn" id="topAddBtn">＋ New task</button></div>
+  </header>
+  <main class="wrap">
+    <section class="welcome">
+      <div><p class="eyebrow">Your workspace</p><h1>Make today count.</h1><p class="sub">Plan your work, focus on what matters, and celebrate every win.</p></div>
+      <div class="date-pill" id="todayLabel">📅 Today</div>
+    </section>
+    <section class="stats" aria-label="Task statistics">
+      <article class="stat"><div class="stat-top">Total tasks <span class="stat-icon">▤</span></div><div class="stat-num" id="totalStat">0</div><div class="stat-foot">Across your whole board</div></article>
+      <article class="stat"><div class="stat-top">In progress <span class="stat-icon">◷</span></div><div class="stat-num" id="doingStat">0</div><div class="stat-foot">Keep the momentum going</div></article>
+      <article class="stat"><div class="stat-top">Completed <span class="stat-icon">✓</span></div><div class="stat-num" id="doneStat">0</div><div class="stat-foot" id="doneFoot">Small steps add up</div><div class="progress-track"><div class="progress-fill" id="progressFill"></div></div></article>
+      <article class="stat"><div class="stat-top">Overdue <span class="stat-icon">!</span></div><div class="stat-num" id="overdueStat">0</div><div class="stat-foot">Tasks past their due date</div></article>
+    </section>
+    <section>
+      <div class="board-toolbar"><div class="board-title">Your task board</div><div class="toolbar-right"><div class="search-wrap"><span>⌕</span><input class="search" id="searchInput" type="search" placeholder="Search tasks..." aria-label="Search tasks" /></div><select class="filter" id="priorityFilter" aria-label="Filter by priority"><option value="all">All priorities</option><option value="high">High priority</option><option value="medium">Medium priority</option><option value="low">Low priority</option></select><button class="secondary-btn" id="clearSearchBtn">Reset</button></div></div>
+      <div class="board" id="board">
+        <section class="column todo" data-status="todo"><div class="column-head"><div class="column-label"><span class="dot"></span>To Do <span class="count" id="count-todo">0</span></div><button class="mini-btn add-column-task" data-status="todo" aria-label="Add task to To Do" title="Add task">＋</button></div><div class="task-list" id="list-todo"></div></section>
+        <section class="column doing" data-status="doing"><div class="column-head"><div class="column-label"><span class="dot"></span>In Progress <span class="count" id="count-doing">0</span></div><button class="mini-btn add-column-task" data-status="doing" aria-label="Add task to In Progress" title="Add task">＋</button></div><div class="task-list" id="list-doing"></div></section>
+        <section class="column done" data-status="done"><div class="column-head"><div class="column-label"><span class="dot"></span>Done <span class="count" id="count-done">0</span></div><button class="mini-btn add-column-task" data-status="done" aria-label="Add task to Done" title="Add task">＋</button></div><div class="task-list" id="list-done"></div></section>
+      </div>
+      <p class="hint">Tip: Drag a task card into another column to update its status.</p>
+    </section>
+    <div class="footer">Made with focus & a little <b>TaskFlow magic</b> ✦ · Your tasks stay saved in this browser.</div>
+  </main>
+</div>
+<div class="modal-backdrop" id="modalBackdrop" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+  <form class="modal" id="taskForm">
+    <div class="modal-head"><h2 id="modalTitle">Create a task</h2><button type="button" class="close-btn" id="closeModal" aria-label="Close">×</button></div>
+    <div class="field"><label for="taskTitle">Task title *</label><input id="taskTitle" name="title" maxlength="100" required placeholder="e.g. Finish portfolio homepage" /></div>
+    <div class="field"><label for="taskDescription">Description (optional)</label><textarea id="taskDescription" name="description" maxlength="300" placeholder="Add a few details to help you get started..."></textarea></div>
+    <div class="form-row"><div class="field"><label for="taskStatus">Status</label><select id="taskStatus" name="status"><option value="todo">To Do</option><option value="doing">In Progress</option><option value="done">Done</option></select></div><div class="field"><label for="taskPriority">Priority</label><select id="taskPriority" name="priority"><option value="medium">Medium</option><option value="high">High</option><option value="low">Low</option></select></div></div>
+    <div class="field"><label for="taskDue">Due date (optional)</label><input id="taskDue" name="dueDate" type="date" /></div>
+    <div class="modal-actions"><button type="button" class="secondary-btn" id="cancelModal">Cancel</button><button type="submit" class="primary-btn" id="saveTaskBtn">Save task</button></div>
+  </form>
+</div>
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+<script src="script.js" defer></script>
+</body>
+</html>
